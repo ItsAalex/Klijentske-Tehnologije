@@ -29,8 +29,8 @@ func (u *UserServiceImpl) Create(user requests.CreateUserRequest) {
 	userModel := models.User{
 		Email:     user.Email,
 		Password:  user.Password,
-		FirstName: user.FirstName,
-		LastName:  user.LastName,
+		Firstname: user.Firstname,
+		Lastname:  user.Lastname,
 		Address:   user.Address,
 		City:      user.City,
 		Postcode:  user.Postcode,

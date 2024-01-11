@@ -24,7 +24,7 @@ func SetupRouter(
 	// add  swagger
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	r.POST("/user/signup")
+	r.POST("/user/signup", userUserController.Create)
 
 	// Define a default route for the root URL ("/")
 	r.GET("/", func(c *gin.Context) {
