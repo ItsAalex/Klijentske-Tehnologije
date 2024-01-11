@@ -22,5 +22,6 @@ func Serve() {
 	// Setup the router
 	routes.SetupRouter(
 		*userUserController,
+		*userAuthController,
 	)
 }

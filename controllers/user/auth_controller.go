@@ -3,11 +3,11 @@ package user
 import (
 	configs "klijentske-tehnologije/configs"
 	models "klijentske-tehnologije/models"
-	requests "klijentske-tehnologije/requests"
 	services "klijentske-tehnologije/services"
 	http "net/http"
 
 	gin "github.com/gin-gonic/gin"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -25,8 +25,17 @@ func NewAuthController(service services.UserService) *AuthController {
 func (ctrl *AuthController) SignUp(c *gin.Context) {
 	db := configs.Connection()
 
-	var request requests.CreateUserRequest
-	if c.Bind(&request) != nil {
+	var body struct {
+		Firstname string
+		Lastname  string
+		Email     string
+		Password  string
+		Address   string
+		City      string
+		Postcode  string
+		Phone     string
+	}
+	if c.Bind(&body) != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to read body",
 		})
@@ -34,7 +43,7 @@ func (ctrl *AuthController) SignUp(c *gin.Context) {
 	}
 
 	// Hash the password
-	hashedPassword, err := services.HashPassword(request.Password)
+	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to hash password",
@@ -44,14 +53,14 @@ func (ctrl *AuthController) SignUp(c *gin.Context) {
 
 	// Create user with hashed password
 	user := models.User{
-		Email:     request.Email,
-		Password:  hashedPassword,
-		Firstname: request.Firstname,
-		Lastname:  request.Lastname,
-		Address:   request.Address,
-		City:      request.City,
-		Postcode:  request.Postcode,
-		Phone:     request.Phone,
+		Email:     body.Email,
+		Password:  string(hash),
+		Firstname: body.Firstname,
+		Lastname:  body.Lastname,
+		Address:   body.Address,
+		City:      body.City,
+		Postcode:  body.Postcode,
+		Phone:     body.Phone,
 	}
 	result := db.Create(&user)
 	if result.Error != nil {
