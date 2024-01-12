@@ -23,8 +23,6 @@ func NewAuthController(service services.UserService, db *gorm.DB) *AuthControlle
 }
 
 func (ctrl *AuthController) SignUp(c *gin.Context) {
-	// db := configs.Connection()  // Remove this line
-
 	var body struct {
 		Firstname string
 		Lastname  string
@@ -42,7 +40,6 @@ func (ctrl *AuthController) SignUp(c *gin.Context) {
 		return
 	}
 
-	// Hash the password
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
