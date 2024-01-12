@@ -1,14 +1,13 @@
 package user
 
 import (
-	configs "klijentske-tehnologije/configs"
 	models "klijentske-tehnologije/models"
 	services "klijentske-tehnologije/services"
 	http "net/http"
 
 	gin "github.com/gin-gonic/gin"
-	"golang.org/x/crypto/bcrypt"
-	"gorm.io/gorm"
+	bcrypt "golang.org/x/crypto/bcrypt"
+	gorm "gorm.io/gorm"
 )
 
 type AuthController struct {
@@ -16,14 +15,15 @@ type AuthController struct {
 	Db          *gorm.DB
 }
 
-func NewAuthController(service services.UserService) *AuthController {
+func NewAuthController(service services.UserService, db *gorm.DB) *AuthController {
 	return &AuthController{
 		userService: service,
+		Db:          db,
 	}
 }
 
 func (ctrl *AuthController) SignUp(c *gin.Context) {
-	db := configs.Connection()
+	// db := configs.Connection()  // Remove this line
 
 	var body struct {
 		Firstname string
@@ -62,7 +62,7 @@ func (ctrl *AuthController) SignUp(c *gin.Context) {
 		Postcode:  body.Postcode,
 		Phone:     body.Phone,
 	}
-	result := db.Create(&user)
+	result := ctrl.Db.Create(&user)
 	if result.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": "Failed to create user",

@@ -19,6 +19,7 @@ func Serve() {
 	configs.LoadConfig()
 	// User Controllers and Services
 	userUserController := userControllers.NewUserController(services.NewUserServiceImpl(repositories.NewUserRepositoryImpl(db)))
+	userAuthController := userControllers.NewAuthController(services.NewUserServiceImpl(repositories.NewUserRepositoryImpl(db)), db)
 	// Setup the router
 	routes.SetupRouter(
 		*userUserController,
