@@ -16,7 +16,7 @@ func Seed() {
 		log.Fatal("hash password error")
 		return
 	}
-	user := models.User{FirstName: "Random name", LastName: "Random Lastname", Email: "random@email.com", Password: string(hashedUserPassword),
+	user := models.User{Firstname: "Random name", Lastname: "Random Lastname", Email: "random@email.com", Password: string(hashedUserPassword),
 		Address: "palilula", City: "Nis", Postcode: "18000", Phone: "069432224"}
 	db.Create(&user)
 	log.Printf("User created successfully with email address %s \n", user.Email)

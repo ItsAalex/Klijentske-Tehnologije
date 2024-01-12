@@ -1,14 +1,14 @@
 package user
 
 import (
-	"klijentske-tehnologije/helpers"
-	"klijentske-tehnologije/requests"
-	"klijentske-tehnologije/responses"
-	"klijentske-tehnologije/services"
-	"net/http"
+	helpers "klijentske-tehnologije/helpers"
+	requests "klijentske-tehnologije/requests"
+	responses "klijentske-tehnologije/responses"
+	services "klijentske-tehnologije/services"
+	http "net/http"
 
-	"github.com/gin-gonic/gin"
-	"gorm.io/gorm"
+	gin "github.com/gin-gonic/gin"
+	gorm "gorm.io/gorm"
 )
 
 type UserController struct {
