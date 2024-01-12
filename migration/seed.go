@@ -29,6 +29,9 @@ func Seed() {
 
 	admin := models.Admin{Name: "Random Admin Name", Email: "random01@gmail.com", Password: string(hashedAdminPassword)}
 	db.Create(&admin)
-
 	log.Printf("Admin created successfully")
+
+	question := models.Question{Name: "John", Surname: "Doe", Email: "john.doe@example.com", Question: "What is the meaning of life?"}
+	db.Create(&question)
+	log.Printf("Question created successfully")
 }
