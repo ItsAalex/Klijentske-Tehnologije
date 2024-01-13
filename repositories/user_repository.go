@@ -9,6 +9,7 @@ import (
 
 type UserRepository interface {
 	Create(user models.User) *models.User
+	FindAll() []models.User
 }
 type UserRepositoryImpl struct {
 	Db *gorm.DB
@@ -23,4 +24,11 @@ func (u *UserRepositoryImpl) Create(user models.User) *models.User {
 	helpers.ErrorPanic(result.Error)
 
 	return &user
+}
+
+func (u *UserRepositoryImpl) FindAll() []models.User {
+	var user []models.User
+	result := u.Db.Find(&user)
+	helpers.ErrorPanic(result.Error)
+	return user
 }

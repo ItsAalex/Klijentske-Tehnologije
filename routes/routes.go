@@ -1,11 +1,12 @@
 package routes
 
 import (
-	"fmt"
+	fmt "fmt"
+	adminController "klijentske-tehnologije/controllers/admin"
 	userController "klijentske-tehnologije/controllers/user"
-	"net/http"
+	http "net/http"
 
-	"github.com/gin-gonic/gin"
+	gin "github.com/gin-gonic/gin"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
 )
@@ -13,6 +14,7 @@ import (
 func SetupRouter(
 	userUserController userController.UserController,
 	userQuestionController userController.QuestionController,
+	adminUserController adminController.UserController,
 
 ) *gin.Engine {
 
@@ -24,6 +26,10 @@ func SetupRouter(
 
 	// add  swagger
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	r.GET("/admin/user", adminUserController.FindAll)
+
+	r.DELETE("/admin/user")
 
 	r.POST("/user/register", userUserController.Create)
 
