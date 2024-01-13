@@ -31,6 +31,8 @@ func SetupRouter(
 
 	r.DELETE("/admin/user/:id", adminUserController.Delete)
 
+	r.POST("/admin/user/approve")
+
 	r.POST("/user/register", userUserController.Create)
 
 	r.POST("/user/question", userQuestionController.Create)
