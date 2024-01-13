@@ -11,6 +11,7 @@ import (
 type UserService interface {
 	Create(user requests.CreateUserRequest)
 	FindAll() []responses.UserResponse
+	Delete(userId int)
 }
 
 // UserServiceImpl is the implementation of the UserService interface.
@@ -65,4 +66,10 @@ func (u *UserServiceImpl) FindAll() []responses.UserResponse {
 
 	// Return the list of UserResponse objects
 	return users
+}
+
+// Delete deletes a user by their ID.
+func (u *UserServiceImpl) Delete(userId int) {
+	// Call the UserRepository's Delete method to delete a user by ID
+	u.UserRepository.Delete(userId)
 }

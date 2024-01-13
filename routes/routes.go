@@ -29,7 +29,7 @@ func SetupRouter(
 
 	r.GET("/admin/user", adminUserController.FindAll)
 
-	r.DELETE("/admin/user")
+	r.DELETE("/admin/user/:id", adminUserController.Delete)
 
 	r.POST("/user/register", userUserController.Create)
 

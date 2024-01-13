@@ -10,6 +10,7 @@ import (
 type UserRepository interface {
 	Create(user models.User) *models.User
 	FindAll() []models.User
+	Delete(userId int)
 }
 type UserRepositoryImpl struct {
 	Db *gorm.DB
@@ -31,4 +32,10 @@ func (u *UserRepositoryImpl) FindAll() []models.User {
 	result := u.Db.Find(&user)
 	helpers.ErrorPanic(result.Error)
 	return user
+}
+
+func (u *UserRepositoryImpl) Delete(userId int) {
+	var user models.User
+	result := u.Db.Where("id =?", userId).Delete(&user)
+	helpers.ErrorPanic(result.Error)
 }
