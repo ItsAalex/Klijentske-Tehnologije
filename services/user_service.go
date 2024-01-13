@@ -27,14 +27,12 @@ func NewUserServiceImpl(userRepository repositories.UserRepository) UserService 
 func (u *UserServiceImpl) Create(user requests.CreateUserRequest) {
 	// Create a UserModel based on the CreateUserRequest
 	userModel := models.User{
-		Email:     user.Email,
-		Password:  user.Password,
-		Firstname: user.Firstname,
-		Lastname:  user.Lastname,
-		Address:   user.Address,
-		City:      user.City,
-		Postcode:  user.Postcode,
-		Phone:     user.Phone,
+		Firstname:    user.Firstname,
+		Lastname:     user.Lastname,
+		Email:        user.Email,
+		StudyProgram: user.StudyProgram,
+		Index:        user.Index,
+		Comment:      user.Comment,
 	}
 
 	// Call the UserRepository's Create method to persist the user in the database
