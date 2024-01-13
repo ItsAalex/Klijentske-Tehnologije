@@ -13,6 +13,7 @@ import (
 func SetupRouter(
 	userUserController userController.UserController,
 	userAuthController userController.AuthController,
+	userQuestionController userController.QuestionController,
 
 ) *gin.Engine {
 
@@ -26,6 +27,8 @@ func SetupRouter(
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
 	r.POST("/user/signup", userAuthController.SignUp)
+
+	r.POST("/user/question", userQuestionController.Create)
 
 	// Define a default route for the root URL ("/")
 	r.GET("/", func(c *gin.Context) {

@@ -23,6 +23,6 @@ func DropTables() {
 
 	db.Migrator().DropTable(&models.User{})
 	db.Migrator().DropTable(&models.Admin{})
-
+	db.Migrator().DropTable(&models.Question{})
 	fmt.Println("Tables dropped.")
 }

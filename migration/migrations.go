@@ -26,5 +26,9 @@ func Migrate() {
 	db.AutoMigrate(&models.User{})
 	fmt.Println("After AutoMigrate User")
 
+	fmt.Println("Before AutoMigrate Question")
+	db.AutoMigrate(&models.Question{})
+	fmt.Println("After AutoMigrate Question")
+
 	defer sqlDB.Close()
 }
