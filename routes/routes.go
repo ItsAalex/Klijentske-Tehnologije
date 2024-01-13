@@ -12,7 +12,6 @@ import (
 
 func SetupRouter(
 	userUserController userController.UserController,
-	userAuthController userController.AuthController,
 	userQuestionController userController.QuestionController,
 
 ) *gin.Engine {
@@ -26,7 +25,7 @@ func SetupRouter(
 	// add  swagger
 	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 
-	r.POST("/user/signup", userAuthController.SignUp)
+	r.POST("/user/register", userUserController.Create)
 
 	r.POST("/user/question", userQuestionController.Create)
 

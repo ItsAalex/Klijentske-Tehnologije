@@ -10,14 +10,8 @@ import (
 
 func Seed() {
 	db, err := configs.Connect()
-
-	hashedUserPassword, err := bcrypt.GenerateFromPassword([]byte("admin123"), 12)
-	if err != nil {
-		log.Fatal("hash password error")
-		return
-	}
-	user := models.User{Firstname: "Random name", Lastname: "Random Lastname", Email: "random@email.com", Password: string(hashedUserPassword),
-		Address: "palilula", City: "Nis", Postcode: "18000", Phone: "069432224"}
+	user := models.User{Firstname: "Random name", Lastname: "Random Lastname", Email: "random@email.com",
+		StudyProgram: "SRT", Index: "SEr 58/20", Comment: "comment"}
 	db.Create(&user)
 	log.Printf("User created successfully with email address %s \n", user.Email)
 
