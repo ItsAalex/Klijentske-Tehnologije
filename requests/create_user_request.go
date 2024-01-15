@@ -6,5 +6,5 @@ type CreateUserRequest struct {
 	Email        string `json:"Email" binding:"required,email"`
 	StudyProgram string
 	Index        string `json:"Index" binding:"required"`
-	Comment      string `json:"Comment" binding:"required"`
+	Comment      string `json:"Comment"`
 }
