@@ -3,6 +3,7 @@ package routes
 import (
 	"fmt"
 	userController "klijentske-tehnologije/controllers/user"
+	"klijentske-tehnologije/middlewares"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -18,6 +19,9 @@ func SetupRouter(
 
 	// Create a new Gin router with default middleware
 	r := gin.Default()
+
+	// Enable CORS middleware
+	r.Use(middlewares.CorsMiddleware())
 
 	// Add Gin recovery middleware to handle panics gracefully
 	r.Use(gin.Recovery())
